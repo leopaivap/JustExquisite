@@ -1,4 +1,5 @@
 import 'package:fashion/view/login_page.dart';
+import 'package:fashion/view/signUp_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,10 +12,20 @@ class JustExquisite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/login',
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/signUp',
       routes: {
-        '/login': (context) => LoginPage(),
+        '/login': (context) => const LoginPage(),
+        '/signUp': (context) => const SignUp(),
       },
+      theme: ThemeData(
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.black,
+          ),
+        ),
+      ),
     );
   }
 }
