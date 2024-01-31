@@ -1,3 +1,4 @@
+import 'package:fashion/util/components.dart';
 import 'package:fashion/util/style.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +56,26 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SearchBar(searchController: searchController),
                 const NewsBoard(),
+                const CategoryFrame(),
+                const Text(
+                  'Flash Sale',
+                  style: kTitleStyle,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      children: [
+                        DefaultLittleButtton(
+                          name: 'All',
+                          isSelectable: true,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -85,55 +106,6 @@ class _HomePageState extends State<HomePage> {
         Icons.keyboard_arrow_down_rounded,
         color: Colors.black,
         size: 25,
-      ),
-    );
-  }
-}
-
-class NewsBoard extends StatelessWidget {
-  const NewsBoard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 25),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.grey.shade200,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'New Collection',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 23,
-            ),
-          ),
-          const Text('Discount 50% for \nthe first transaction'),
-          const SizedBox(height: 15),
-          ElevatedButton(
-            onPressed: () {},
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromRGBO(0, 0, 0, 0.8)),
-            ),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'Shop Now',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -182,27 +154,6 @@ class SearchBar extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class NotificationIcon extends StatelessWidget {
-  const NotificationIcon({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration:
-          BoxDecoration(color: Colors.grey.shade200, shape: BoxShape.circle),
-      child: IconButton(
-        onPressed: () {},
-        icon: const Icon(
-          Icons.notifications_on_sharp,
-          color: Colors.black,
-        ),
-      ),
     );
   }
 }
