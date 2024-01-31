@@ -234,15 +234,15 @@ class NewsBoard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         color: Colors.grey.shade200,
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'New Collection',
             style: kTitleStyle,
           ),
-          Text('Discount 50% for \nthe first transaction'),
-          SizedBox(height: 15),
+          const Text('Discount 50% for \nthe first transaction'),
+          const SizedBox(height: 15),
           DefaultLittleButtton(
             name: 'Shop Now',
             isSelectable: false,
@@ -253,12 +253,14 @@ class NewsBoard extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class DefaultLittleButtton extends StatefulWidget {
-  const DefaultLittleButtton(
+  DefaultLittleButtton(
       {super.key, required this.name, required this.isSelectable});
 
   final String name;
   final bool isSelectable;
+  bool isSelected = false;
 
   @override
   State<DefaultLittleButtton> createState() => _DefaultLittleButttonState();
@@ -271,24 +273,24 @@ class _DefaultLittleButttonState extends State<DefaultLittleButtton> {
       onPressed: () {
         if (widget.isSelectable) {
           setState(() {
-            //TODO - logica para trocar de cor
+            widget.isSelected = !widget.isSelected;
           });
         }
       },
       style: widget.isSelectable == false
-          ? ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromRGBO(0, 0, 0, 0.8)),
-            )
-          : ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            ),
+          ? kButtonColorBlack
+          : widget.isSelected == false
+              ? kButtonColorWhite
+              : kButtonColorBlack,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Text(
           widget.name,
-          style:
-              widget.isSelectable == false ? kLitteTextWhite : kLitteTextBlack,
+          style: widget.isSelectable == false
+              ? kLitteTextWhite
+              : widget.isSelected == true
+                  ? kLitteTextWhite
+                  : kLitteTextBlack,
         ),
       ),
     );
