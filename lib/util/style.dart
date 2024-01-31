@@ -15,3 +15,12 @@ const kLitteTextBlack = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 15,
 );
+
+final kButtonColorWhite = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+);
+
+final kButtonColorBlack = ButtonStyle(
+  backgroundColor:
+      MaterialStateProperty.all<Color>(const Color.fromRGBO(0, 0, 0, 0.8)),
+);
