@@ -1,3 +1,4 @@
+import 'package:fashion/util/style.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -123,6 +124,192 @@ class RoundedButton extends StatelessWidget {
             color: Colors.black,
             size: 28,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class CategoryFrame extends StatelessWidget {
+  const CategoryFrame({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Category',
+                style: kTitleStyle,
+              ),
+              GestureDetector(
+                onTap: () {
+                  //TODO - abrir todas as categorias
+                },
+                child: const Text('See All'),
+              ),
+            ],
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Wrap(
+                direction: Axis.horizontal,
+                children: [
+                  CategoryButton(
+                    icon: Icons.abc_sharp,
+                    name: 'Teste',
+                  ),
+                  CategoryButton(
+                    icon: Icons.abc_sharp,
+                    name: 'Teste',
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CategoryButton extends StatelessWidget {
+  const CategoryButton({
+    super.key,
+    required this.icon,
+    required this.name,
+  });
+
+  final IconData icon;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(50)),
+          child: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              icon,
+              color: Colors.black,
+              size: 35,
+            ),
+          ),
+        ),
+        Text(
+          name,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class NewsBoard extends StatelessWidget {
+  const NewsBoard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 25),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Colors.grey.shade200,
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'New Collection',
+            style: kTitleStyle,
+          ),
+          Text('Discount 50% for \nthe first transaction'),
+          SizedBox(height: 15),
+          DefaultLittleButtton(
+            name: 'Shop Now',
+            isSelectable: false,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DefaultLittleButtton extends StatefulWidget {
+  const DefaultLittleButtton(
+      {super.key, required this.name, required this.isSelectable});
+
+  final String name;
+  final bool isSelectable;
+
+  @override
+  State<DefaultLittleButtton> createState() => _DefaultLittleButttonState();
+}
+
+class _DefaultLittleButttonState extends State<DefaultLittleButtton> {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        if (widget.isSelectable) {
+          setState(() {
+            //TODO - logica para trocar de cor
+          });
+        }
+      },
+      style: widget.isSelectable == false
+          ? ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(
+                  const Color.fromRGBO(0, 0, 0, 0.8)),
+            )
+          : ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Text(
+          widget.name,
+          style:
+              widget.isSelectable == false ? kLitteTextWhite : kLitteTextBlack,
+        ),
+      ),
+    );
+  }
+}
+
+class NotificationIcon extends StatelessWidget {
+  const NotificationIcon({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration:
+          BoxDecoration(color: Colors.grey.shade200, shape: BoxShape.circle),
+      child: IconButton(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.notifications_on_sharp,
+          color: Colors.black,
         ),
       ),
     );

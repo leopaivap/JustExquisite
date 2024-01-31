@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
-const kTitleStyle = TextStyle(
+const kTitleStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 23);
+
+const kAppBarTitle = TextStyle(fontWeight: FontWeight.bold, fontSize: 25);
+
+const kLitteTextWhite = TextStyle(
+  color: Colors.white,
   fontWeight: FontWeight.bold,
-  fontSize: 23
+  fontSize: 15,
 );
 
-const kAppBarTitle = TextStyle(
+const kLitteTextBlack = TextStyle(
+  color: Colors.black,
   fontWeight: FontWeight.bold,
-  fontSize: 25
+  fontSize: 15,
 );
