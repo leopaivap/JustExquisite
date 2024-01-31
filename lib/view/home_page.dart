@@ -10,8 +10,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late List<Widget Function()> _pages;
   String selectedLocation = 'New York, USA';
   final searchController = TextEditingController();
+  int _selectedPage = 0;
+  Color colorIconSelected = Colors.black, colorIconNotSelected = Colors.grey;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      mainHome,
+      teste,
+      //TODO - adicionar mais páginas
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,64 +37,40 @@ class _HomePageState extends State<HomePage> {
           ),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Wrap(
-                      direction: Axis.vertical,
-                      spacing: 0,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Text('Location'),
-                        ),
-                        Row(
-                          children: [
-                            const Icon(Icons.location_on_sharp),
-                            const SizedBox(width: 2),
-                            _dropdownLocations(),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const NotificationIcon(),
-                  ],
-                ),
-                SearchBar(searchController: searchController),
-                const NewsBoard(),
-                const CategoryFrame(),
-                const Text(
-                  'Flash Sale',
-                  style: kTitleStyle,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      children: [
-                        DefaultLittleButtton(
-                          name: 'All',
-                          isSelectable: true,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+        body: IndexedStack(
+          index: _selectedPage,
+          children: _pages.map((pageBuilder) => pageBuilder()).toList(),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
             ),
-          ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              label: 'Business',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: 'School',
+            ),
+          ],
+          selectedItemColor: colorIconSelected,
+          unselectedItemColor: colorIconNotSelected,
+          selectedIconTheme: IconThemeData(color: colorIconSelected, size: 30),
+          onTap: _onBottomNavigationTapped,
         ),
       ),
     );
+  }
+
+  void _onBottomNavigationTapped(int index) {
+    setState(() {
+      _selectedPage = index;
+      colorIconSelected = Colors.black;
+      colorIconNotSelected = Colors.grey;
+    });
   }
 
   DropdownButton<String> _dropdownLocations() {
@@ -106,6 +95,73 @@ class _HomePageState extends State<HomePage> {
         Icons.keyboard_arrow_down_rounded,
         color: Colors.black,
         size: 25,
+      ),
+    );
+  }
+
+  Widget mainHome() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Wrap(
+                  direction: Axis.vertical,
+                  spacing: 0,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Text('Location'),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.location_on_sharp),
+                        const SizedBox(width: 2),
+                        _dropdownLocations(),
+                      ],
+                    ),
+                  ],
+                ),
+                const NotificationIcon(),
+              ],
+            ),
+            SearchBar(searchController: searchController),
+            const NewsBoard(),
+            const CategoryFrame(),
+            const Text(
+              'Flash Sale',
+              style: kTitleStyle,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  children: [
+                    DefaultLittleButtton(
+                      name: 'All',
+                      isSelectable: true,
+                    ),
+                    DefaultLittleButtton(
+                      name: 'All',
+                      isSelectable: true,
+                    ),
+                    DefaultLittleButtton(
+                      name: 'All',
+                      isSelectable: true,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -156,4 +212,8 @@ class SearchBar extends StatelessWidget {
       ],
     );
   }
+}
+
+Widget teste() {
+  return Text('teste');
 }
