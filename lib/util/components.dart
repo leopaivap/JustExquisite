@@ -317,3 +317,78 @@ class NotificationIcon extends StatelessWidget {
     );
   }
 }
+
+class ProductCard extends StatelessWidget {
+  const ProductCard({
+    super.key,
+    required this.context,
+    required this.image,
+    required this.name,
+    required this.price,
+    required this.rating,
+  });
+
+  final BuildContext context;
+  final String image, name, price;
+  final double rating;
+
+  @override
+  Widget build(BuildContext context) {
+    double screenSize = MediaQuery.of(context).size.width;
+
+    return Container(
+      width: screenSize < 1000 ? screenSize / 2 - 25 : screenSize / 3 - 25,
+      padding: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(
+            image,
+            fit: BoxFit.cover,
+            height:
+                screenSize < 1000 ? screenSize / 2 - 15 : screenSize / 3 - 15,
+            width:
+                screenSize < 1000 ? screenSize / 2 - 25 : screenSize / 3 - 25,
+          ),
+          const SizedBox(height: 12),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'R\$ $price',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(children: [
+                  const Icon(Icons.star_rounded),
+                  Text(rating.toString())
+                ])
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
