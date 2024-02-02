@@ -9,11 +9,13 @@ class DefaultField extends StatefulWidget {
     required this.name,
     required this.isPassword,
     required this.hintText,
+    required this.isEditable,
   });
 
   final String name, hintText;
   final TextEditingController controller;
   bool isPassword = false;
+  late bool isEditable;
 
   @override
   State<DefaultField> createState() => _DefaultFieldState();
@@ -44,6 +46,7 @@ class _DefaultFieldState extends State<DefaultField> {
                         borderRadius: BorderRadius.circular(30)),
                     hintText: widget.hintText,
                   ),
+                  enabled: widget.isEditable,
                 )
               : TextField(
                   controller: widget.controller,
@@ -64,6 +67,7 @@ class _DefaultFieldState extends State<DefaultField> {
                     ),
                     hintText: widget.hintText,
                   ),
+                  enabled: widget.isEditable,
                 ),
         ],
       ),
@@ -329,12 +333,13 @@ class ProductCard extends StatelessWidget {
   });
 
   final BuildContext context;
-  final String image, name, price;
-  final double rating;
+  final String image, name;
+  final double rating, price;
 
   @override
   Widget build(BuildContext context) {
     double screenSize = MediaQuery.of(context).size.width;
+    bool showRating = screenSize >= 400;
 
     return Container(
       width: screenSize < 1000 ? screenSize / 2 - 25 : screenSize / 3 - 25,
@@ -365,7 +370,11 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      name.length > 10
+                          ? screenSize > 500
+                              ? name
+                              : '${name.substring(0, 10)}...'
+                          : name,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -380,10 +389,11 @@ class ProductCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(children: [
-                  const Icon(Icons.star_rounded),
-                  Text(rating.toString())
-                ])
+                if (showRating)
+                  Row(children: [
+                    const Icon(Icons.star_rounded),
+                    Text(rating.toString())
+                  ])
               ],
             ),
           ),
