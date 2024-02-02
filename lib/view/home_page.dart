@@ -1,5 +1,7 @@
+import 'package:fashion/model/product.dart';
 import 'package:fashion/util/components.dart';
 import 'package:fashion/util/style.dart';
+import 'package:fashion/view/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,10 +20,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    Product.initProducts();
     _pages = [
       mainHome,
       teste,
-      //TODO - adicionar mais páginas
+      profile,
     ];
   }
 
@@ -113,106 +116,106 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget mainHome() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Wrap(
-                  direction: Axis.vertical,
-                  spacing: 0,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: Text('Location'),
+    if (Product.allProducts.isEmpty) {
+      print('ta vazio lixo');
+      //return const Center(child: CircularProgressIndicator());
+    }
+    return FutureBuilder<List<ProductCard>>(
+      future: loadProducts(context),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          List<ProductCard> products = snapshot.data ?? [];
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Wrap(
+                        direction: Axis.vertical,
+                        spacing: 0,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            child: Text('Location'),
+                          ),
+                          Row(
+                            children: [
+                              const Icon(Icons.location_on_sharp),
+                              const SizedBox(width: 2),
+                              _dropdownLocations(),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const NotificationIcon(),
+                    ],
+                  ),
+                  SearchBar(searchController: searchController),
+                  const NewsBoard(),
+                  const CategoryFrame(),
+                  const Text(
+                    'Flash Sale',
+                    style: kTitleStyle,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        children: [
+                          DefaultLittleButtton(
+                            name: 'All',
+                            isSelectable: true,
+                          ),
+                          DefaultLittleButtton(
+                            name: 'All',
+                            isSelectable: true,
+                          ),
+                          DefaultLittleButtton(
+                            name: 'All',
+                            isSelectable: true,
+                          ),
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        const Icon(Icons.location_on_sharp),
-                        const SizedBox(width: 2),
-                        _dropdownLocations(),
-                      ],
-                    ),
-                  ],
-                ),
-                const NotificationIcon(),
-              ],
-            ),
-            SearchBar(searchController: searchController),
-            const NewsBoard(),
-            const CategoryFrame(),
-            const Text(
-              'Flash Sale',
-              style: kTitleStyle,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Wrap(
-                  direction: Axis.horizontal,
-                  children: [
-                    DefaultLittleButtton(
-                      name: 'All',
-                      isSelectable: true,
-                    ),
-                    DefaultLittleButtton(
-                      name: 'All',
-                      isSelectable: true,
-                    ),
-                    DefaultLittleButtton(
-                      name: 'All',
-                      isSelectable: true,
-                    ),
-                  ],
-                ),
+                  ),
+                  Wrap(
+                    direction: Axis.horizontal,
+                    spacing: 15,
+                    runSpacing: 25,
+                    children: products,
+                  ),
+                ],
               ),
             ),
-            Wrap(
-              direction: Axis.horizontal,
-              spacing: 15,
-              runSpacing: 25,
-              children: [
-                ProductCard(
-                  context: context,
-                  image: 'assets/jaqueta.jpeg',
-                  name: 'Black Jacket',
-                  price: '119,99',
-                  rating: 4.9,
-                ),
-                ProductCard(
-                  context: context,
-                  image: 'assets/jaqueta.jpeg',
-                  name: 'Black Jacket',
-                  price: '119,99',
-                  rating: 4.9,
-                ),
-                ProductCard(
-                  context: context,
-                  image: 'assets/jaqueta.jpeg',
-                  name: 'Black Jacket',
-                  price: '119,99',
-                  rating: 4.9,
-                ),
-                ProductCard(
-                  context: context,
-                  image: 'assets/jaqueta.jpeg',
-                  name: 'Black Jacket',
-                  price: '119,99',
-                  rating: 4.9,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+          );
+        }
+      },
     );
   }
+}
+
+Future<List<ProductCard>> loadProducts(BuildContext context) async {
+  await Product.initProducts();
+  return Product.allProducts.map((product) {
+    return ProductCard(
+      context: context,
+      image: product.image,
+      name: product.name,
+      price: product.price,
+      rating: product.rating,
+    );
+  }).toList();
 }
 
 class SearchBar extends StatelessWidget {
@@ -234,17 +237,15 @@ class SearchBar extends StatelessWidget {
               hintText: 'Search',
               contentPadding: EdgeInsets.symmetric(horizontal: 10),
               prefixIcon: Icon(Icons.search_outlined),
-               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black), 
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black), 
+                borderSide: BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-
             ),
-            
           ),
         ),
         const SizedBox(width: 10),
@@ -271,4 +272,8 @@ class SearchBar extends StatelessWidget {
 
 Widget teste() {
   return Text('teste');
+}
+
+Widget profile() {
+  return const ProfilePage();
 }
