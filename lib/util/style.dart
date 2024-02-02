@@ -24,3 +24,5 @@ final kButtonColorBlack = ButtonStyle(
   backgroundColor:
       MaterialStateProperty.all<Color>(const Color.fromRGBO(0, 0, 0, 0.8)),
 );
+
+const Color kColorIconSelected =  Colors.black, kColorIconNotSelected = Colors.grey;
