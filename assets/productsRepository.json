@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "name": "Stylish Watch",
+    "price": 49.99,
+    "category": "all",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.2
+  },
+  {
+    "id": 2,
+    "name": "Leather Wallet",
+    "price": 29.99,
+    "category": "accessories",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 3.8
+  },
+  {
+    "id": 3,
+    "name": "Black Jacket",
+    "price": 79.99,
+    "category": "clothes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.5
+  },
+  {
+    "id": 4,
+    "name": "Running Shoes",
+    "price": 59.99,
+    "category": "shoes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.0
+  },
+  {
+    "id": 5,
+    "name": "Sun Hat",
+    "price": 19.99,
+    "category": "hats",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.8
+  },
+  {
+    "id": 6,
+    "name": "Sunglasses",
+    "price": 39.99,
+    "category": "accessories",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 3.5
+  },
+  {
+    "id": 7,
+    "name": "Blue T-shirt",
+    "price": 24.99,
+    "category": "clothes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.1
+  },
+  {
+    "id": 8,
+    "name": "Canvas Sneakers",
+    "price": 54.99,
+    "category": "shoes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.3
+  },
+  {
+    "id": 9,
+    "name": "Fedora Hat",
+    "price": 29.99,
+    "category": "hats",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.7
+  },
+  {
+    "id": 10,
+    "name": "Designer Watch",
+    "price": 99.99,
+    "category": "all",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.9
+  },
+  {
+    "id": 11,
+    "name": "Leather Backpack",
+    "price": 69.99,
+    "category": "accessories",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 3.6
+  },
+  {
+    "id": 12,
+    "name": "Denim Jacket",
+    "price": 89.99,
+    "category": "clothes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.4
+  },
+  {
+    "id": 13,
+    "name": "Trail Running Shoes",
+    "price": 79.99,
+    "category": "shoes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.2
+  },
+  {
+    "id": 14,
+    "name": "Wide-Brim Hat",
+    "price": 34.99,
+    "category": "hats",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.6
+  },
+  {
+    "id": 15,
+    "name": "Polarized Sunglasses",
+    "price": 49.99,
+    "category": "accessories",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.0
+  },
+  {
+    "id": 16,
+    "name": "Striped Polo Shirt",
+    "price": 34.99,
+    "category": "clothes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.3
+  },
+  {
+    "id": 17,
+    "name": "High-Top Sneakers",
+    "price": 64.99,
+    "category": "shoes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 3.9
+  },
+  {
+    "id": 18,
+    "name": "Beanie",
+    "price": 19.99,
+    "category": "hats",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.8
+  },
+  {
+    "id": 19,
+    "name": "Smartwatch",
+    "price": 129.99,
+    "category": "all",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.7
+  },
+  {
+    "id": 20,
+    "name": "Leather Belt",
+    "price": 39.99,
+    "category": "accessories",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 3.7
+  },
+  {
+    "id": 21,
+    "name": "Bomber Jacket",
+    "price": 99.99,
+    "category": "clothes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.5
+  },
+  {
+    "id": 22,
+    "name": "Casual Sneakers",
+    "price": 44.99,
+    "category": "shoes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.1
+  },
+  {
+    "id": 23,
+    "name": "Bucket Hat",
+    "price": 24.99,
+    "category": "hats",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 3.8
+  },
+  {
+    "id": 24,
+    "name": "Aviator Sunglasses",
+    "price": 59.99,
+    "category": "accessories",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.2
+  },
+  {
+    "id": 25,
+    "name": "Hooded Sweatshirt",
+    "price": 49.99,
+    "category": "clothes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.6
+  },
+  {
+    "id": 26,
+    "name": "Athletic Shoes",
+    "price": 69.99,
+    "category": "shoes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.0
+  },
+  {
+    "id": 27,
+    "name": "Straw Hat",
+    "price": 29.99,
+    "category": "hats",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.4
+  },
+  {
+    "id": 28,
+    "name": "Fitness Tracker",
+    "price": 79.99,
+    "category": "all",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 4.9
+  },
+  {
+    "id": 29,
+    "name": "Messenger Bag",
+    "price": 59.99,
+    "category": "accessories",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 3.5
+  },
+  {
+    "id": 30,
+    "name": "Denim Jeans",
+    "price": 54.99,
+    "category": "clothes",
+    "image": "assets/jaqueta.jpeg",
+    "rating": 0.0
+  }
+]
