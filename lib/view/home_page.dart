@@ -14,7 +14,6 @@ class _HomePageState extends State<HomePage> {
   String selectedLocation = 'New York, USA';
   final searchController = TextEditingController();
   int _selectedPage = 0;
-  Color colorIconSelected = Colors.black, colorIconNotSelected = Colors.grey;
 
   @override
   void initState() {
@@ -42,23 +41,30 @@ class _HomePageState extends State<HomePage> {
           children: _pages.map((pageBuilder) => pageBuilder()).toList(),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: _buildNavigationBarIcon(Icons.home, 0),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.business),
-              label: 'Business',
+              icon: _buildNavigationBarIcon(Icons.shopping_bag_rounded, 1),
+              label: 'Cart',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'School',
+              icon: _buildNavigationBarIcon(Icons.person, 2),
+              label: 'Profile',
             ),
           ],
-          selectedItemColor: colorIconSelected,
-          unselectedItemColor: colorIconNotSelected,
-          selectedIconTheme: IconThemeData(color: colorIconSelected, size: 30),
+          selectedIconTheme:
+              const IconThemeData(color: kColorIconSelected, size: 30),
+          unselectedIconTheme:
+              const IconThemeData(color: kColorIconNotSelected, size: 25),
+          selectedItemColor: kColorIconSelected,
+          unselectedItemColor: kColorIconNotSelected,
+          showSelectedLabels: true,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.shifting,
+          currentIndex: _selectedPage,
           onTap: _onBottomNavigationTapped,
         ),
       ),
@@ -68,9 +74,16 @@ class _HomePageState extends State<HomePage> {
   void _onBottomNavigationTapped(int index) {
     setState(() {
       _selectedPage = index;
-      colorIconSelected = Colors.black;
-      colorIconNotSelected = Colors.grey;
     });
+  }
+
+  Icon _buildNavigationBarIcon(IconData iconData, int pageIndex) {
+    return Icon(
+      iconData,
+      color: _selectedPage == pageIndex
+          ? kColorIconSelected
+          : kColorIconNotSelected,
+    );
   }
 
   DropdownButton<String> _dropdownLocations() {
@@ -221,10 +234,17 @@ class SearchBar extends StatelessWidget {
               hintText: 'Search',
               contentPadding: EdgeInsets.symmetric(horizontal: 10),
               prefixIcon: Icon(Icons.search_outlined),
-              border: OutlineInputBorder(
+               focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black), 
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black), 
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+
             ),
+            
           ),
         ),
         const SizedBox(width: 10),
