@@ -27,6 +27,9 @@ class JustExquisite extends StatelessWidget {
             backgroundColor: Colors.black,
           ),
         ),
+        textTheme: Theme.of(context).textTheme.copyWith(
+          bodySmall: const TextStyle(color: Colors.black), 
+        ),
       ),
     );
   }
