@@ -3,6 +3,7 @@ import 'package:fashion/util/components.dart';
 import 'package:fashion/util/style.dart';
 import 'package:fashion/view/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fashion/model/category.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,6 +22,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Product.initProducts();
+    Category.initCategories();
+    
     _pages = [
       mainHome,
       teste,
@@ -116,10 +119,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget mainHome() {
-    if (Product.allProducts.isEmpty) {
-      print('ta vazio lixo');
-      //return const Center(child: CircularProgressIndicator());
-    }
     return FutureBuilder<List<ProductCard>>(
       future: loadProducts(context),
       builder: (context, snapshot) {

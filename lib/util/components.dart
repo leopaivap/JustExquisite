@@ -1,4 +1,5 @@
 import 'package:fashion/util/style.dart';
+import 'package:fashion/model/category.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -160,22 +161,13 @@ class CategoryFrame extends StatelessWidget {
               ),
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Wrap(
                 direction: Axis.horizontal,
-                children: [
-                  CategoryButton(
-                    icon: Icons.abc_sharp,
-                    name: 'Teste',
-                  ),
-                  CategoryButton(
-                    icon: Icons.abc_sharp,
-                    name: 'Teste',
-                  ),
-                ],
+                children: Category.categoriesButtons(),
               ),
             ),
           ),

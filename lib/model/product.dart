@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:fashion/model/category.dart';
 import 'package:flutter/services.dart';
 
 class Product {
   final int id;
   final String name, image;
   final double price, rating;
-  final Category category;
+  final CategoryEnum category;
 
   Product(
       {required this.id,
@@ -38,22 +39,22 @@ class Product {
     );
   }
 
-  static Category _stringToCategory(String categoryString) {
+  static CategoryEnum _stringToCategory(String categoryString) {
     switch (categoryString.toLowerCase()) {
       case 'all':
-        return Category.all;
+        return CategoryEnum.all;
       case 'accessories':
-        return Category.accessories;
+        return CategoryEnum.accessories;
       case 'clothes':
-        return Category.clothes;
+        return CategoryEnum.clothes;
       case 'shoes':
-        return Category.shoes;
+        return CategoryEnum.shoes;
       case 'hats':
-        return Category.hats;
+        return CategoryEnum.hats;
       default:
         throw Exception('Categoria não reconhecida: $categoryString');
     }
   }
 }
 
-enum Category { all, accessories, clothes, shoes, hats }
+
